@@ -38,12 +38,16 @@ class DishDetail extends Component {
                             dish.comments.map((comment) => {
                                 return (
                                     <div>
-                                        <p class="mt-3">
+                                        <ul className="list-unstyled">
+                                            <li className="mt-3">{comment.comment}</li>
+                                            <li className="mt-3">-- {comment.author}, {this.formatDate(comment.date)}</li>
+                                        </ul>
+                                        {/* <p class="mt-3">
                                             {comment.comment}
                                         </p>
                                         <p class="mt-3">
                                             -- {comment.author}, {this.formatDate(comment.date)}
-                                        </p>
+                                        </p> */}
                                     </div>
 
 
