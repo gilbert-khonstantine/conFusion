@@ -1,18 +1,21 @@
-import React, { Component } from 'react';
-import { Card, CardBody, CardTitle, CardImg, CardImgOverlay, CardText } from 'reactstrap';
+import React from 'react';
+import { Card, CardBody, CardTitle, CardImg, CardText, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 function DishDetail(props) {
 
     function renderDish(dish) {
         if (dish != null)
             return (
-                <Card>
-                    <CardImg top src={dish.image} alt={dish.name} />
-                    <CardBody>
-                        <CardTitle>{dish.name}</CardTitle>
-                        <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card>
+                <div className="col-12 col-md-5 m-1">
+                    <Card>
+                        <CardImg top src={dish.image} alt={dish.name} />
+                        <CardBody>
+                            <CardTitle>{dish.name}</CardTitle>
+                            <CardText>{dish.description}</CardText>
+                        </CardBody>
+                    </Card>
+                </div>
             );
         else
             return (
@@ -25,48 +28,52 @@ function DishDetail(props) {
         return new Date(string).toLocaleDateString([], options);
     }
 
-    function getDishComments(dish) {
-        if (dish != null)
-            if (dish.comments != null)
-                return (
-                    <div className="col-12 col-md-5 m-1">
-                        <h4>Comments</h4>
-                        {
-                            dish.comments.map((comment) => {
-                                return (
-                                    <div>
-                                        <ul className="list-unstyled">
-                                            <li className="mt-3">{comment.comment}</li>
-                                            <li className="mt-3">-- {comment.author}, {formatDate(comment.date)}</li>
-                                        </ul>
-                                        {/* <p class="mt-3">
-                                            {comment.comment}
-                                        </p>
-                                        <p class="mt-3">
-                                            -- {comment.author}, {this.formatDate(comment.date)}
-                                        </p> */}
-                                    </div>
+    function getDishComments(comments) {
+        if (comments != null)
+            return (
+                <div className="col-12 col-md-5 m-1">
+                    <h4>Comments</h4>
+                    {
+                        comments.map((comment) => {
+                            return (
+                                <>
+                                    <ul className="list-unstyled">
+                                        <li className="mt-3">{comment.comment}</li>
+                                        <li className="mt-3">-- {comment.author}, {formatDate(comment.date)}</li>
+                                    </ul>
+                                </>
 
 
-                                )
-                            })
-                        }
-                    </div >
+                            )
+                        })
+                    }
+                </div >
 
-                );
-            else
-                return (
-                    <div></div >
-                );
+            );
+        else
+            return (
+                <div></div >
+            );
     }
 
 
     return (
-        <div className="row">
-            <div className="col-12 col-md-5 m-1">
-                {renderDish(props.selectedDish)}
-            </div >
-            {getDishComments(props.selectedDish)}
+        <div className='container'>
+            <div className="row">
+                <Breadcrumb>
+
+                    <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                    <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                </Breadcrumb>
+                <div className="col-12">
+                    <h3>{props.dish.name}</h3>
+                    <hr />
+                </div>
+            </div>
+            <div className="row">
+                {renderDish(props.dish)}
+                {getDishComments(props.comments)}
+            </div>
         </div>
     )
 
