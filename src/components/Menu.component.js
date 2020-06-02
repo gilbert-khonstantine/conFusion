@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Card, CardTitle, CardImg, CardImgOverlay, Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import DishDetail from './DishDetail.component'
+
 function Menu(props) {
 
     const menu = props.dishes.map((dish) => {
