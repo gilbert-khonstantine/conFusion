@@ -217,6 +217,7 @@ class Contact extends Component {
                                         onChange={this.handleInput}
                                         rows={12}
                                         onBlur={this.handleBlur} />
+                                    <FormFeedback>{errors.feedback}</FormFeedback>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
