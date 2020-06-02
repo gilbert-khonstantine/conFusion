@@ -3,12 +3,7 @@ import { Link, Route } from 'react-router-dom';
 import { Card, CardTitle, CardImg, CardImgOverlay, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import DishDetail from './DishDetail.component'
 function Menu(props) {
-    const DishWithId = ({ match }) => {
-        return (
-            <DishDetail dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
-                comments={this.state.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))} />
-        );
-    };
+
     const menu = props.dishes.map((dish) => {
         return (
             <div className="col-12 col-md-5 m-1">
