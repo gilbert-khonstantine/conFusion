@@ -1,8 +1,12 @@
-import React from 'react';
-import { Card, CardBody, CardTitle, CardImg, CardText, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import React, { useState } from 'react';
+import { Card, CardBody, CardTitle, CardImg, CardText, Breadcrumb, BreadcrumbItem, Button, Modal } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import CommentForm from "./CommentForm.component";
 
 function DishDetail(props) {
+
+    const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal);
 
     function renderDish(dish) {
         if (dish != null)
@@ -28,6 +32,10 @@ function DishDetail(props) {
         return new Date(string).toLocaleDateString([], options);
     }
 
+    function toggleCommentForm() {
+        toggle();
+    }
+
     function getDishComments(comments) {
         if (comments != null)
             return (
@@ -42,11 +50,11 @@ function DishDetail(props) {
                                         <li className="mt-3">-- {comment.author}, {formatDate(comment.date)}</li>
                                     </ul>
                                 </>
-
-
                             )
                         })
                     }
+                    <Button outline onClick={toggleCommentForm}><span className="fa fa-pencil fa-lg"></span> Submit Comment</Button>
+                    <CommentForm modal={modal} toggle={toggle} />
                 </div >
 
             );
@@ -61,7 +69,6 @@ function DishDetail(props) {
         <div className='container'>
             <div className="row">
                 <Breadcrumb>
-
                     <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
                     <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
                 </Breadcrumb>
