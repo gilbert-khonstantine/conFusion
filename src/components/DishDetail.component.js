@@ -36,7 +36,7 @@ function DishDetail(props) {
         toggle();
     }
 
-    function getDishComments(comments) {
+    function getDishComments({ comments, addComments, dish }) {
         if (comments != null)
             return (
                 <div className="col-12 col-md-5 m-1">
@@ -54,7 +54,7 @@ function DishDetail(props) {
                         })
                     }
                     <Button outline onClick={toggleCommentForm}><span className="fa fa-pencil fa-lg"></span> Submit Comment</Button>
-                    <CommentForm modal={modal} toggle={toggle} />
+                    <CommentForm modal={modal} toggle={toggle} addComments={addComments} dishId={dish.id} />
                 </div >
 
             );
@@ -79,7 +79,7 @@ function DishDetail(props) {
             </div>
             <div className="row">
                 {renderDish(props.dish)}
-                {getDishComments(props.comments)}
+                {getDishComments(props)}
             </div>
         </div>
     )

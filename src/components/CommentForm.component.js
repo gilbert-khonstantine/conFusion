@@ -6,11 +6,16 @@ const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
 
-function handleSubmit(values) {
-    alert('Value in the form is: ' + JSON.stringify(values));
-}
 
 function CommentForm(props) {
+    function handleSubmit(values) {
+        alert('Value in the form is: ' + JSON.stringify(values));
+        console.log("dish ID " + props.dishId);
+        console.log(values)
+        console.log(props.dishId, values.rating, values.author, values.comment);
+        props.addComments(props.dishId, values.rating, values.author, values.comment);
+    }
+
     const closeBtn = <button className="close" onClick={props.toggle}>&times;</button>;
     console.log(props.modal);
     return (
@@ -19,9 +24,9 @@ function CommentForm(props) {
             <ModalBody>
                 <LocalForm onSubmit={(values) => handleSubmit(values)}>
                     <Row className="form-group">
-                        <Label htmlFor="firstName" md={2}>Rating</Label>
+                        <Label htmlFor="rating" md={2}>Rating</Label>
                         <Col md={12}>
-                            <Control.select model=".contactType" name="contactType"
+                            <Control.select model=".rating" name="rating"
                                 className="form-control">
                                 <option>1</option>
                                 <option>2</option>
@@ -34,14 +39,14 @@ function CommentForm(props) {
                     <Row className="form-group">
                         <Label htmlFor="name" md={12}>Your Name</Label>
                         <Col md={12}>
-                            <Control.text model=".yourName" placeholder="Your Name"
+                            <Control.text model=".author" placeholder="Your Name"
                                 name="yourName" id="yourName"
                                 className="form-control"
                                 validators={{
                                     required, minLength: minLength(3), maxLength: maxLength(15)
                                 }}
                             />
-                            <Errors model=".yourName" show="touched" className="text-danger" messages={{
+                            <Errors model=".author" show="touched" className="text-danger" messages={{
                                 required: "Input is required. ",
                                 minLength: "Input must be at least 3 characters. ",
                                 maxLength: "Input must be at most 15 characteres. "
