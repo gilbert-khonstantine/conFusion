@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Card, CardBody, CardTitle, CardImg, CardText, Breadcrumb, BreadcrumbItem, Button, Modal } from 'reactstrap';
+import { Card, CardBody, CardTitle, CardImg, CardText, Breadcrumb, BreadcrumbItem, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from "./CommentForm.component";
+import { Loading } from "./Loading.component";
 
 function DishDetail(props) {
 
@@ -64,25 +65,43 @@ function DishDetail(props) {
             );
     }
 
-
-    return (
-        <div className='container'>
-            <div className="row">
-                <Breadcrumb>
-                    <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-                    <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
-                </Breadcrumb>
-                <div className="col-12">
-                    <h3>{props.dish.name}</h3>
-                    <hr />
+    if (props.dishesLoading) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <Loading />
                 </div>
             </div>
-            <div className="row">
-                {renderDish(props.dish)}
-                {getDishComments(props)}
+        );
+    }
+    else if (props.dishesErr) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <h4>{props.dishesErr}</h4>
+                </div>
             </div>
-        </div>
-    )
+        );
+    }
+    else
+        return (
+            <div className='container'>
+                <div className="row">
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{props.dish.name}</h3>
+                        <hr />
+                    </div>
+                </div>
+                <div className="row">
+                    {renderDish(props.dish)}
+                    {getDishComments(props)}
+                </div>
+            </div>
+        )
 
 }
 
