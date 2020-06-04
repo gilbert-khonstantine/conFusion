@@ -31,8 +31,6 @@ function RenderCard({ item, isLoading, err }) {
 }
 
 function Home(props) {
-    console.log("PROPROPROPROP")
-    console.log(props)
     return (
         <div className="container">
             <div className="row">
