@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import CommentForm from "./CommentForm.component";
 import { Loading } from "./Loading.component";
 import { baseUrl } from "../shared/baseURL";
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function DishDetail(props) {
 
@@ -14,13 +15,19 @@ function DishDetail(props) {
         if (dish != null)
             return (
                 <div className="col-12 col-md-5 m-1">
-                    <Card>
-                        <CardImg top src={baseUrl + dish.image} alt={dish.name} />
-                        <CardBody>
-                            <CardTitle>{dish.name}</CardTitle>
-                            <CardText>{dish.description}</CardText>
-                        </CardBody>
-                    </Card>
+                    <FadeTransform
+                        in
+                        transformProps={{
+                            exitTransform: 'scale(0.5) translateY(-50%)'
+                        }}>
+                        <Card>
+                            <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+                            <CardBody>
+                                <CardTitle>{dish.name}</CardTitle>
+                                <CardText>{dish.description}</CardText>
+                            </CardBody>
+                        </Card>
+                    </FadeTransform>
                 </div>
             );
         else
@@ -43,18 +50,20 @@ function DishDetail(props) {
             return (
                 <div className="col-12 col-md-5 m-1">
                     <h4>Comments</h4>
-                    {
-                        comments.map((comment) => {
-                            return (
-                                <>
-                                    <ul className="list-unstyled">
-                                        <li className="mt-3">{comment.comment}</li>
-                                        <li className="mt-3">-- {comment.author}, {formatDate(comment.date)}</li>
-                                    </ul>
-                                </>
-                            )
-                        })
-                    }
+                    <Stagger in>
+                        {
+                            comments.map((comment) => {
+                                return (
+                                    <Fade in>
+                                        <ul className="list-unstyled">
+                                            <li className="mt-3">{comment.comment}</li>
+                                            <li className="mt-3">-- {comment.author}, {formatDate(comment.date)}</li>
+                                        </ul>
+                                    </Fade>
+                                )
+                            })
+                        }
+                    </Stagger>
                     <Button outline onClick={toggleCommentForm}><span className="fa fa-pencil fa-lg"></span> Submit Comment</Button>
                     <CommentForm modal={modal} toggle={toggle} postComment={postComment} dishId={dish.id} />
                 </div >

@@ -17,7 +17,6 @@ function CommentForm(props) {
     }
 
     const closeBtn = <button className="close" onClick={props.toggle}>&times;</button>;
-    console.log(props.modal);
     return (
         <Modal isOpen={props.modal} toggle={props.toggle}>
             <ModalHeader toggle={props.toggle} close={closeBtn}>Submit Comment</ModalHeader>

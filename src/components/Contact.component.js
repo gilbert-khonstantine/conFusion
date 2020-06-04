@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Breadcrumb, BreadcrumbItem, Label, Col, Button, Row, Form } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Label, Col, Button, Row } from 'reactstrap';
 import { Link } from "react-router-dom";
-import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Form, Control, Errors } from 'react-redux-form';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -17,6 +17,7 @@ class Contact extends Component {
 
     handleSubmit(values) {
         this.props.resetFeedbackForm();
+        this.props.postFeedback(values.firstName, values.lastName, values.telNum, values.email, values.agree, values.contactType, values.message);
     }
 
     render() {
@@ -59,7 +60,7 @@ class Contact extends Component {
                     </div>
                 </div>
 
-                <div className="row">
+                <div className="row row-content">
                     <div className="col-12">
                         <h3>Send Us Your Feedback</h3>
                     </div>
@@ -151,13 +152,13 @@ class Contact extends Component {
                             <Row className="form-group">
                                 <Label htmlFor="feedback" md={2}>Feedback</Label>
                                 <Col md={10}>
-                                    <Control.textarea model=".feedback" placeholder="Your feedback"
-                                        name="feedback" id="feedback"
+                                    <Control.textarea model=".message" placeholder="Your feedback"
+                                        name="message" id="message"
                                         className="form-control"
                                         validators={{
                                             required, minLength: minLength(9)
                                         }} />
-                                    <Errors show="touched" model=".feedback" className="text-danger" messages={{
+                                    <Errors show="touched" model=".message" className="text-danger" messages={{
                                         required: "Input is required!",
                                         minLength: "Input must be at least 9 characters"
                                     }} />
