@@ -13,7 +13,7 @@ function CommentForm(props) {
         console.log("dish ID " + props.dishId);
         console.log(values)
         console.log(props.dishId, values.rating, values.author, values.comment);
-        props.addComment(props.dishId, values.rating, values.author, values.comment);
+        props.postComment(props.dishId, values.rating, values.author, values.comment);
     }
 
     const closeBtn = <button className="close" onClick={props.toggle}>&times;</button>;

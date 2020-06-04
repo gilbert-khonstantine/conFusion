@@ -8,7 +8,7 @@ import Home from './Home.component';
 import About from "./About.component";
 import { Switch, Redirect, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addComment, fetchDishes, fetchComments, fetchPromos, fetchLeaders } from "../redux/ActionCreation";
+import { postComment, fetchDishes, fetchComments, fetchPromos, fetchLeaders } from "../redux/ActionCreation";
 import { actions } from 'react-redux-form';
 
 const mapStateToProps = state => {
@@ -22,8 +22,8 @@ const mapStateToProps = state => {
 
 // mapDispatchToProps connects Redux actions to React props. This way a connected React component will be able to send messages to the store.
 const mapDispatchToProps = dispatch => ({
-    addComment: (dishId, rating, author, comment) => {
-        return dispatch(addComment(dishId, rating, author, comment))
+    postComment: (dishId, rating, author, comment) => {
+        return dispatch(postComment(dishId, rating, author, comment))
     },
     fetchDishes: () => {
         return dispatch(fetchDishes())
@@ -75,7 +75,7 @@ class Main extends Component {
             return (
                 <DishDetail dish={this.props.dishes.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
                     comments={this.props.comments.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}
-                    addComment={this.props.addComment}
+                    postComment={this.props.postComment}
                     dishesLoading={this.props.dishes.isLoading}
                     dishesErr={this.props.dishes.err} />
             );
