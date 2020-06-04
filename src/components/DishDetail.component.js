@@ -3,6 +3,7 @@ import { Card, CardBody, CardTitle, CardImg, CardText, Breadcrumb, BreadcrumbIte
 import { Link } from 'react-router-dom';
 import CommentForm from "./CommentForm.component";
 import { Loading } from "./Loading.component";
+import { baseUrl } from "../shared/baseURL";
 
 function DishDetail(props) {
 
@@ -14,7 +15,7 @@ function DishDetail(props) {
             return (
                 <div className="col-12 col-md-5 m-1">
                     <Card>
-                        <CardImg top src={dish.image} alt={dish.name} />
+                        <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                         <CardBody>
                             <CardTitle>{dish.name}</CardTitle>
                             <CardText>{dish.description}</CardText>
@@ -37,7 +38,7 @@ function DishDetail(props) {
         toggle();
     }
 
-    function getDishComments({ comments, addComments, dish }) {
+    function getDishComments({ comments, addComment, dish }) {
         if (comments != null)
             return (
                 <div className="col-12 col-md-5 m-1">
@@ -55,7 +56,7 @@ function DishDetail(props) {
                         })
                     }
                     <Button outline onClick={toggleCommentForm}><span className="fa fa-pencil fa-lg"></span> Submit Comment</Button>
-                    <CommentForm modal={modal} toggle={toggle} addComments={addComments} dishId={dish.id} />
+                    <CommentForm modal={modal} toggle={toggle} addComment={addComment} dishId={dish.id} />
                 </div >
 
             );
