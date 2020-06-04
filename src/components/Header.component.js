@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Jumbotron, Nav, NavItem, NavLink, NavbarToggler, Collapse, Modal, ModalBody, ModalHeader, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Link } from "react-router-dom";
 
 class Header extends Component {
     constructor(props) {
@@ -40,16 +41,16 @@ class Header extends Component {
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
                                 <NavItem>
-                                    <NavLink className="nav-link" href='/home'><span className="fa fa-home fa-lg"></span> Home</NavLink>
+                                    <Link className="nav-link" to='/home'><span className="fa fa-home fa-lg"></span> Home</Link>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link" href='/aboutus'><span className="fa fa-info fa-lg"></span> About Us</NavLink>
+                                    <Link className="nav-link" to='/aboutus'><span className="fa fa-info fa-lg"></span> About Us</Link>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link" href='/menu'><span className="fa fa-list fa-lg"></span> Menu</NavLink>
+                                    <Link className="nav-link" to='/menu'><span className="fa fa-list fa-lg"></span> Menu</Link>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link" href='/contactus'><span className="fa fa-address-card fa-lg"></span> Contact Us</NavLink>
+                                    <Link className="nav-link" to='/contactus'><span className="fa fa-address-card fa-lg"></span> Contact Us</Link>
                                 </NavItem>
                                 <NavItem>
                                     <Button outline onClick={this.toggleLogin}><span className="fa fa-sign-in fa-lg"></span> Login</Button>
